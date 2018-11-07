@@ -37,6 +37,7 @@ var myGameArea = {
         })
     }, 
     clear : function(){
+        this.context.beginPath()
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }
@@ -52,9 +53,11 @@ function component(width, height, color, x, y) {
         ctx = myGameArea.context;
         ctx.fillStyle = this.color;
         //ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.beginPath()
         ctx.moveTo(this.x, this.y)
         ctx.arc(this.x, this.y, this.width,0,Math.PI*2, false);
 	    ctx.fill()
+        ctx.endPath();
     }
 }
 
@@ -72,7 +75,7 @@ function updateGameArea() {
     if (myGameArea.key && myGameArea.key == 82) {console.log("hi"); myGamePiece.color = "red" }
     if (myGameArea.key && myGameArea.key == 38) {myGamePiece.width += 1; }
     if (myGameArea.key && myGameArea.key == 40) {if (myGamePiece.width >=1) {myGamePiece.width--;}}
-    if (myGameArea.key && myGameArea.key == 37) {console.log("clear"); myGameArea.context.clearRect(0, 0, 800, 500); }
+    if (myGameArea.key && myGameArea.key == 32) {console.log("clear"); myGameArea.context.clearRect(0, 0, 800, 500); }
     console.log(myGamePiece.width)
     myGamePiece.update();
 }
